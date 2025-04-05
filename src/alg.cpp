@@ -13,10 +13,10 @@ double pown(double value, uint16_t n) {
 
 uint64_t fact(uint16_t n) {
   uint64_t result = 1;
-  for (uint16_t i = 2; i <= n; i++) {
-    result *= i;
-  }
-  return result;
+    for (uint16_t i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
 }
 
 double calcItem(double x, uint16_t n) {
@@ -26,7 +26,7 @@ double calcItem(double x, uint16_t n) {
 double expn(double x, uint16_t count) {
   double sum = 0.0;
     for (uint16_t n = 0; n < count; ++n) {
-        sum += calcExpItem(x, n);
+        sum += calcItem(x, n);
     }
     return sum;
 }
@@ -34,7 +34,8 @@ double expn(double x, uint16_t count) {
 double sinn(double x, uint16_t count) {
   double sum = 0.0;
     for (uint16_t n = 0; n < count; ++n) {
-        sum += calcSinItem(x, n);
+        int sign = (n % 2 == 0) ? 1 : -1;
+        sum += sign * calcItem(x, 2*n + 1);
     }
     return sum;
 }
@@ -42,7 +43,8 @@ double sinn(double x, uint16_t count) {
 double cosn(double x, uint16_t count) {
   double sum = 0.0;
     for (uint16_t n = 0; n < count; ++n) {
-        sum += calcCosItem(x, n);
+        int sign = (n % 2 == 0) ? 1 : -1;
+        sum += sign * calcItem(x, 2*n);
     }
     return sum;
 }
