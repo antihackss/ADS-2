@@ -5,10 +5,10 @@
 
 double pown(double value, uint16_t n) {
   double result = 1.0;
-  for (uint16_t i = 0; i < n; i++) {
-    result *= value;
-  }
-  return result;
+    for (uint16_t i = 0; i < n; ++i) {
+        result *= value;
+    }
+    return result;
 }
 
 uint64_t fact(uint16_t n) {
@@ -20,33 +20,29 @@ uint64_t fact(uint16_t n) {
 }
 
 double calcItem(double x, uint16_t n) {
-  return (pown(x, n) / (fact(n));
+  return pown(x, n) / fact(n);
 }
 
 double expn(double x, uint16_t count) {
-  double sum = 1.0;
-  double term = 1.0;
-  for (uint16_t i = 1; i < count; i++) {
-    term *= x / i;
-    sum += term;
-  }
-  return sum;
+  double sum = 0.0;
+    for (uint16_t n = 0; n < count; ++n) {
+        sum += calcExpItem(x, n);
+    }
+    return sum;
 }
 
 double sinn(double x, uint16_t count) {
   double sum = 0.0;
-  for (uint16_t i = 0; i < count; i++) {
-    double term = calcItem(x, 2 * i + 1);
-    sum += (i % 2 == 0) ? term : -term;
-  }
-  return sum;
+    for (uint16_t n = 0; n < count; ++n) {
+        sum += calcSinItem(x, n);
+    }
+    return sum;
 }
 
 double cosn(double x, uint16_t count) {
   double sum = 0.0;
-  for (uint16_t i = 0; i < count; i++) {
-    double term = calcItem(x, 2 * i);
-    sum += (i % 2 == 0) ? term : -term;
-  }
-  return sum;
+    for (uint16_t n = 0; n < count; ++n) {
+        sum += calcCosItem(x, n);
+    }
+    return sum;
 }
