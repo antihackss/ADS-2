@@ -20,31 +20,35 @@ uint64_t fact(uint16_t n) {
 }
 
 double calcItem(double x, uint16_t n) {
-  return pown(x, n) / fact(n);
+  return pown(x, n) / static_cast<double>(fact(n));
 }
 
 double expn(double x, uint16_t count) {
   double sum = 0.0;
+    double term = 1.0;
     for (uint16_t n = 0; n < count; ++n) {
-        sum += calcItem(x, n);
+        sum += term;
+        term *= x / (n + 1);
     }
     return sum;
 }
 
 double sinn(double x, uint16_t count) {
   double sum = 0.0;
+    double term = x;
     for (uint16_t n = 0; n < count; ++n) {
-        int sign = (n % 2 == 0) ? 1 : -1;
-        sum += sign * calcItem(x, 2*n + 1);
+        sum += term;
+        term *= -x * x / ((2*n + 2) * (2*n + 3));
     }
     return sum;
 }
 
 double cosn(double x, uint16_t count) {
   double sum = 0.0;
+    double term = 1.0;
     for (uint16_t n = 0; n < count; ++n) {
-        int sign = (n % 2 == 0) ? 1 : -1;
-        sum += sign * calcItem(x, 2*n);
+        sum += term;
+        term *= -x * x / ((2*n + 1) * (2*n + 2));
     }
     return sum;
 }
