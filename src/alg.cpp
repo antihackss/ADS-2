@@ -1,6 +1,6 @@
 // Copyright 2022 NNTU-CS
-#include <cstdint>
 #include "alg.h"
+#include <cstdint>
 #include <cmath>
 
 double pown(double value, uint16_t n) {
@@ -24,15 +24,15 @@ double calcItem(double x, uint16_t n) {
 double expn(double x, uint16_t count) {
   double result = 0.0;
   for (uint16_t n = 0; n < count; ++n)
-    result += calcItem(x, n);
+    result += pown(x, n) / static_cast<double>(fact(n));
   return result;
 }
 
 double sinn(double x, uint16_t count) {
   double result = 0.0;
   for (uint16_t n = 0; n < count; ++n) {
-    double term = calcItem(-1.0, n) * calcItem(x, 2 * n + 1);
-    result += term;
+    double sign = (n % 2 == 0) ? 1.0 : -1.0;
+    result += sign * pown(x, 2 * n + 1) / static_cast<double>(fact(2 * n + 1));
   }
   return result;
 }
@@ -40,8 +40,8 @@ double sinn(double x, uint16_t count) {
 double cosn(double x, uint16_t count) {
   double result = 0.0;
   for (uint16_t n = 0; n < count; ++n) {
-    double term = calcItem(-1.0, n) * calcItem(x, 2 * n);
-    result += term;
+    double sign = (n % 2 == 0) ? 1.0 : -1.0;
+    result += sign * pown(x, 2 * n) / static_cast<double>(fact(2 * n));
   }
   return result;
 }
