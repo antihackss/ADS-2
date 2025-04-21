@@ -1,4 +1,3 @@
-// Copyright 2022 NNTU-CS
 #include "alg.h"
 #include <cstdint>
 #include <cmath>
@@ -12,22 +11,25 @@ double pown(double value, uint16_t n) {
 
 uint64_t fact(uint16_t n) {
   uint64_t result = 1;
-  for (uint16_t i = 1; i <= n; ++i)
+  for (uint16_t i = 2; i <= n; ++i)
     result *= i;
   return result;
 }
 
 double calcItem(double x, uint16_t n) {
-  double n = pown(x, n);
-  double d = fact(n);
-  return n / d;
+  return pown(x, n) / static_cast<double>(fact(n));
 }
 
 double expn(double x, uint16_t count) {
   double result = 0.0;
-  for (uint16_t n = 0; n <= count; ++n) {
-    result += calcItem(x, n);
-  }  
+  for (uint16_t n = 0; n < count; ++n) {
+    double item = calcItem(x, n);
+    
+    if (std::abs(item) < 1e-15) {
+      break;
+    }
+    result += item;
+  }
   return result;
 }
 
@@ -48,4 +50,3 @@ double cosn(double x, uint16_t count) {
   }
   return result;
 }
-
