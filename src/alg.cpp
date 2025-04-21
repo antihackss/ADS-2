@@ -1,3 +1,4 @@
+// Copyright 2022 NNTU-CS
 #include "alg.h"
 #include <cstdint>
 #include <cmath>
@@ -9,11 +10,12 @@ double pown(double value, uint16_t n) {
   return result;
 }
 
-uint64_t fact(uint16_t n) {
-  uint64_t result = 1;
-  for (uint16_t i = 2; i <= n; ++i)
-    result *= i;
-  return result;
+double expn(double x, uint16_t count) {
+    double result = 0.0;
+    for (uint16_t n = 0; n < count; ++n) {
+        result += calcItem(x, n);
+    }
+    return result;
 }
 
 double calcItem(double x, uint16_t n) {
