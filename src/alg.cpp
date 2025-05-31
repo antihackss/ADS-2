@@ -23,17 +23,18 @@ double calcItem(double x, uint16_t n) {
 
 double expn(double x, uint16_t count) {
     double result = 0.0;
-    for (uint16_t n = 0; n < count; ++n) {
-        result += pown(x, n) / static_cast<double>(fact(n));
+    for (uint16_t n = 0; n <= count; ++n) {
+        result += calcItem(x, n);
     }
     return result;
 }
 
 double sinn(double x, uint16_t count) {
     double result = 0.0;
-    for (uint16_t n = 1; n <= count; ++n) {
-        double sign = (n % 2 == 0) ? -1.0 : 1.0;
-        result += sign * pown(x, 2 * n - 1) / static_cast<double>(fact(2 * n - 1));
+    for (uint16_t n = 0; n < count; ++n) {
+        double sign = (n % 2 == 0) ? 1.0 : -1.0;
+        result += sign * pown(x, 2 * n + 1) /
+                 static_cast<double>(fact(2 * n + 1));
     }
     return result;
 }
@@ -42,7 +43,8 @@ double cosn(double x, uint16_t count) {
     double result = 0.0;
     for (uint16_t n = 0; n < count; ++n) {
         double sign = (n % 2 == 0) ? 1.0 : -1.0;
-        result += sign * pown(x, 2 * n) / static_cast<double>(fact(2 * n));
+        result += sign * pown(x, 2 * n) /
+                 static_cast<double>(fact(2 * n));
     }
     return result;
 }
